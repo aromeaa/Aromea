@@ -373,7 +373,8 @@
     }
     
     .card-details.expanded {
-      max-height: 500px; /* Altura máxima cuando está expandido */
+      max-height: none; /* permite que se expanda completamente */
+      overflow: visible;
       border-top: 1px solid var(--border);
       margin-top: 1rem;
       padding-top: 1rem;
