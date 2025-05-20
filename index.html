@@ -149,9 +149,57 @@
     
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 2.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 2rem;
     }
+
+    
+
+    @media (max-width: 480px) {
+      .card-content {
+        padding: 1rem;
+        gap: 1rem;
+      }
+
+      .card-content h2 {
+        font-size: 1.2rem;
+      }
+
+      .card-price {
+        font-size: 1rem;
+      }
+
+      .card-content select,
+      .card-content button {
+        font-size: 0.9rem;
+        padding: 0.6rem;
+      }
+
+      .search-container,
+      nav select,
+      nav button {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+      }
+
+      .grid {
+        gap: 1rem;
+        padding: 0 0.5rem;
+      }
+    }
+
+    .search-container,
+    nav select,
+    nav button {
+      font-size: 0.9rem;
+      padding: 0.5rem 1rem;
+    }
+
+    .grid {
+      gap: 1rem;
+      padding: 0 0.5rem;
+    }
+  
     
     /* Estilos responsivos para la grid */
     @media (min-width: 600px) {
@@ -511,7 +559,7 @@
   </div>
   
   <footer class="footer">
-    <p>&copy; 2025 Aroméa. Hecho con ❤️ en Colombia. <br class="mobile-only"> Visítanos en <a href="https://instagram.com/aromea.col" target="_blank">@Aroméa</a></p>
+    <p>&copy; 2025 Aroméa. Hecho con ❤️ <br class="mobile-only"> Visítanos en <a href="https://instagram.com/aromea.col" target="_blank">@Aroméa</a></p>
   </footer>
   <script>
     const perfumes = [
@@ -869,7 +917,7 @@
         descripcion: "Una chispeante y alegre composición floral acuática con un toque dulce que irradia juventud y un espíritu vivaz.",
         notas: "Pomelo, frambuesa, notas acuáticas, jazmín, peonía, pimienta rosa, iris, gamuza, ámbar, madera de cedro.",
         recomendado: "Días soleados de primavera o verano, actividades al aire libre o momentos en los que desees una fragancia fresca, cítrica y floral con un toque amaderado y elegante.",
-        imagen: "https://luryx.com.co/pub/media/catalog/product/cache/17a2882685dcb778cb02abe71b33b15c/_/6/_6_5_65105131_18.jpg",
+        imagen: "https://fedco.vtexassets.com/arquivos/ids/161090/00194267_1.jpg?v=638347490278370000",
         versiones: [
           { nombre: "Original", precio: 150000 }
         ]
@@ -905,7 +953,7 @@
         descripcion: "Una tentadora y sensual combinación oriental especiada con notas dulces y frutales que despierta la pasión y el deseo.",
         notas: "Pimienta rosa, cardamomo, elemí, bergamota, abrótano, albahaca, jazmín, vainilla, notas amaderadas, almizcle, vetiver.",
         recomendado: "Noches frescas de otoño o invierno, cenas románticas o encuentros especiales, gracias a su combinación de notas especiadas, dulces y amaderadas que evocan calidez y sofisticación.",
-        imagen: "https://luryx.com.co/pub/media/catalog/product/cache/17a2882685dcb778cb02abe71b33b15c/_/6/_6_5_65115511_11.jpg",
+        imagen: "https://brastygroup.vshcdn.net/images/w700/99328-1.jpg?v=1741814231",
         versiones: [
           { nombre: "Original", precio: 150000 }
         ]
@@ -1263,7 +1311,7 @@
         descripcion: "Una vibrante y refrescante composición cítrica aromática con un toque especiado y amaderado, ideal para un hombre moderno y enérgico.",
         notas: "Piña, bergamota, pimienta, pera, cardamomo, clavo, almizcle, sándalo, pachulí.",
         recomendado: "Salidas nocturnas o eventos sociales donde busques una fragancia vibrante, especiada y afrutada que transmita una personalidad audaz y segura.",
-        imagen: "https://abscents.com.mx/cdn/shop/files/image_e0c6bff2-b017-4899-b4eb-6d3dee40e29c-PhotoRoom.png-PhotoRoom-fotor-20240323145229.jpg?v=1711227164&width=900",
+        imagen: "https://static.wixstatic.com/media/5585a5_88d29d6d21314257b7c974fc1a78170e~mv2.png/v1/fit/w_500,h_500,q_90/file.png",
         versiones: [
           { nombre: "Original", precio: 310000 }
         ]
@@ -1299,7 +1347,7 @@
         descripcion: "Una clásica y elegante fragancia amaderada aromática con toques cítricos frescos y un fondo cálido y reconfortante.",
         notas: "Bergamota, lavanda, menta fresca, tomillo, musgo, geranio, sándalo, jazmín, ámbar, cedro, almizcle.",
         recomendado: "Uso diario en primavera y otoño, o para ocasiones informales donde desees una fragancia fresca, aromática y ligeramente amaderada que proyecte elegancia discreta.",
-        imagen: "https://luryx.com.co/pub/media/catalog/product/cache/17a2882685dcb778cb02abe71b33b15c/b/u/burberry-11.jpg",
+        imagen: "https://assets.burberry.com/is/image/Burberryltd/F7D7B5B1-B9FA-4D6C-869A-740CCD455DC7?$BBY_V3_SL_1$&wid=1501&hei=1500",
         versiones: [
           { nombre: "Original", precio: 210000 }
         ]
@@ -1311,7 +1359,7 @@
         descripcion: "Una delicada y luminosa fragancia floral frutal con un toque cítrico chispeante y un fondo suave y almizclado, perfecta para un espíritu joven y alegre.",
         notas: "Litchi, yuzu, mandarina, hojas de piña; peonía rosa, flor de durazno, pera; almizcle blanco, maderas claras.",
         recomendado: "Días soleados de primavera y verano, actividades al aire libre o momentos en los que desees una fragancia fresca, afrutada y floral que evoque ligereza y elegancia.",
-        imagen: "https://luryx.com.co/pub/media/catalog/product/cache/c8edb2bdb5b2ee5e63e5c6a1c32c6866/3/4/3400136-1.png",
+        imagen: "https://nichecorner.com/cdn/shop/files/Raspberrysss.png?v=1700177824&width=1100",
         versiones: [
           { nombre: "Original", precio: 250000 }
         ]
@@ -1508,7 +1556,7 @@
         descripcion: "Audaz como tú. Así es el eau de parfum. Una fragancia que refleja la juventud sin límites, la autenticidad y la libertad: la libertad de ser tú misma. Porque no hay nada más heroico que seguir siendo tú.",
         notas: "Mandarina, frambuesa, flor de azahar, jazmín, sándalo, cedro. ",
         recomendado: "Mujeres jóvenes y dinámicas que buscan una fragancia fresca y vibrante, perfecta para el uso diario o eventos informales, aportando un toque de energía y feminidad.",
-        imagen: "https://luryx.com.co/pub/media/catalog/product/cache/17a2882685dcb778cb02abe71b33b15c/8/4/8411061994702_1.jpg",
+        imagen: "https://veronnaperfumeria.com/cdn/shop/files/575425-0000-001.webp?v=1738799259",
         versiones: [
           { nombre: "1.1 Premium", precio: 110000 },
           { nombre: "Original", precio: 420000 }
@@ -1521,7 +1569,7 @@
         descripcion: "Mantente joven para siempre, no pierdas tu autenticidad y conviértete así en uno de los héroes para los que fue creado.",
         notas: "Pera, jengibre, cannabis, geranio, salvia, almizcle, cuero.",
         recomendado: "Hombres jóvenes y dinámicos que buscan una fragancia fresca y moderna, perfecta para el uso diario o eventos informales, aportando un toque de energía y autenticidad.",
-        imagen: "https://luryx.com.co/pub/media/catalog/product/cache/17a2882685dcb778cb02abe71b33b15c/c/a/caro.png",
+        imagen: "https://farma365.com.ar/wp-content/uploads/2024/02/Carolina-Herrera-212-Men-Heroes-1.jpg",
         versiones: [
           { nombre: "1.1 Premium", precio: 110000 },
           { nombre: "Original", precio: 420000 }
@@ -1572,7 +1620,7 @@
         descripcion: "Una fragancia masculina oriental especiada con un toque dulce y seductor, que encarna el magnetismo y la sofisticación de la noche en la ciudad, ideal para el hombre que desea destacar con una sensualidad moderna y atractiva.",
         notas: "Mandarina, bergamota, notas verdes, pimienta rosa, cardamomo, flores, sándalo, madera de gaiac, almizcle, ámbar y vainilla.",
         recomendado: "Noche, citas especiales o cuando buscas una fragancia cálida y envolvente que deje una impresión duradera y seductora.",
-        imagen: "https://luryx.com.co/pub/media/catalog/product/cache/17a2882685dcb778cb02abe71b33b15c/_/6/_6_5_65116560_3.jpg",
+        imagen: "https://scentsperfumes.com.au/cdn/shop/products/212SexyMen100mledt_300x300.png?v=1626431864",
         versiones: [
           { nombre: "Original", precio: 370000 }
         ]
@@ -1596,7 +1644,7 @@
         descripcion: "No, tú no necesitas fiesta. ¡La fiesta te necesita a ti! Equípate con la esencia masculina y sensual de la confianza en ti mismo, como la que viene concentrada dentro del eau de toilette para hombre, y deja de esperar algo extraordinario. ",
         notas: "Caviar de lima, maracuyá, pimienta negra, jengibre, vodka, ginebra, menta, especias, ámbar, cuero y notas amaderadas.",
         recomendado: "Noche, eventos sociales, fiestas exclusivas o cuando deseas destacar con una fragancia original, fresca y con un toque licoroso distintivo.",
-        imagen: "https://luryx.com.co/pub/media/catalog/product/cache/17a2882685dcb778cb02abe71b33b15c/6/5/65116791.png",
+        imagen: "https://www.beautybase.com/images/carolina-herrera-212-vip-men-eau-de-toilette-100ml-spray-p1372-32321_zoom.jpg",
         versiones: [
           { nombre: "1.1 Premium", precio: 130000 },
           { nombre: "Original", precio: 360000 }
@@ -1684,7 +1732,7 @@
         descripcion: "Irradia atrevimiento y se oculta en un icónico frasco que brilla como un diamante.",
         notas: "Cereza negra, almendra amarga, rosa, lirio, vainilla Bourbon y vetiver.",
         recomendado: "Eventos formales, noches frías.",
-        imagen: "https://luryx.com.co/pub/media/catalog/product/cache/17a2882685dcb778cb02abe71b33b15c/8/0/800_x_12008411061058466_1.jpg",
+        imagen: "https://disfragancias.com/cdn/shop/files/carolina_herrera_very_good_girl_glam.jpg?v=1724644844",
         versiones: [
           { nombre: "Original", precio: 520000 }
         ]
@@ -2803,7 +2851,7 @@
         descripcion: "Una fragancia aromática especiada que evoca una historia de seducción irresistible y memorable.",
         notas: "Jengibre, mandarina, bergamota, maninka, lavanda, cuero y notas amaderadas. ",
         recomendado: "Noche o ocasiones especiales, cuando deseas dejar una impresión duradera y seductora con un aroma cálido, especiado y con un toque exótico y masculino.",
-        imagen: "https://luryx.com.co/pub/media/catalog/product/cache/17a2882685dcb778cb02abe71b33b15c/8/2/82453689.png",
+        imagen: "https://felix.com.pa/cdn/shop/products/Diseno_sin_titulo_-_2023-02-10T114330.745.png?v=1676047480",
         versiones: [
           { nombre: "Original", precio: 320000 }
         ]
@@ -3199,7 +3247,7 @@
         descripcion: "Una fragancia ámbar amaderada que combina elegancia, fuerza y un toque audaz.",
         notas: "Mandarina, esclarea, caramelo, haba tonka y vetiver.",
         recomendado: "Noche o eventos especiales, para quienes buscan una fragancia energizante, adictiva y con un aroma dulce, amaderado y sensual que deja una impresión duradera.",
-        imagen: "https://luryx.com.co/pub/media/catalog/product/cache/17a2882685dcb778cb02abe71b33b15c/8/4/8435415030885_1_1.jpg",
+        imagen: "https://sensabeauty.com/cdn/shop/files/907970_JEANPAULGAULTIERSCANDALMEN3.4OZEDTSPRAY_4f86ba04-72c1-41bf-9049-ec0763b6348c.jpg?v=1701132357",
         versiones: [
           { nombre: "1.1 Premium", precio: 140000 },
           { nombre: "Original", precio: 400000 }
@@ -3224,7 +3272,7 @@
         descripcion: "Una fragancia ámbar floral femenina, misteriosa y mágica, que evoca un mundo de ensueño y fantasía.",
         notas: "Violeta, notas marinas, hoja de plátano, petit grain, nardos, magnolia, lirio de los valles, pimienta, incienso, sándalo, vainilla de Madagascar y mirra.",
         recomendado: "Noche o momentos especiales, o cuando deseas sentirte enigmática, femenina y dejar una impresión dulce, floral y con un toque oriental distintivo. ",
-        imagen: "https://luryx.com.co/pub/media/catalog/product/cache/17a2882685dcb778cb02abe71b33b15c/3/4/34201.png",
+        imagen: "https://static.sweetcare.com/img/prd/488/v-638200522772978482/jesus-del-pozo-012656jp_01.webp",
         versiones: [
           { nombre: "Original", precio: 200000 }
         ]
@@ -3466,7 +3514,7 @@
         descripcion: "Una fragancia ámbar amaderada unisex que presenta una mezcla opulenta y sofisticada con un carácter oriental cálido y duradero.",
         notas: "Azafrán, nuez moscada, lavanda, madera de oud, pachulí y almizcle.",
         recomendado: "Noche o climas más frescos, para quienes buscan una fragancia rica, intensa y con un toque oriental amaderado dulce y especiado que deja una impresión majestuosa..",
-        imagen: "https://lattafa.com/wp-content/uploads/2024/05/2-96.jpg",
+        imagen: "https://lattafa.com/wp-content/uploads/2024/05/1-96.jpg",
         versiones: [
           { nombre: "1.1 Premium", precio: 140000 },
           { nombre: "Original", precio: 210000 }
@@ -3474,12 +3522,12 @@
       },
       {
         id: 245,
-        nombre: "Lattafa Bade´e Al Oud Amethyest",
+        nombre: "Lattafa Bade´e Al Oud Amethyst",
         categoria: "arabe",
         descripcion: "Una fragancia ámbar vainilla unisex que presenta una mezcla cálida y sofisticada con la opulencia de las rosas, la profundidad del oud y la dulzura seductora de la vainilla.",
         notas: "Bergamota, pimienta rosa, rosa turca, rosa búlgara, jazmín, madera de oud, ámbar y vainilla.",
         recomendado: "Noche o eventos especiales, para quienes buscan una fragancia envolvente, misteriosa y con un aroma floral dulce y amaderado oriental distintivo.",
-        imagen: "https://frutafrescaco.vtexassets.com/arquivos/ids/62647586/6291108733875.jpg?v=638810108022570000",
+        imagen: "https://lattafa.com/wp-content/uploads/2024/10/BADEE-AL-OUD-AMETHYST-BOX-AND-BOTTLE_page-0001.jpg",
         versiones: [
           { nombre: "1.1 Premium", precio: 140000 },
           { nombre: "Original", precio: 210000 }
@@ -3492,7 +3540,7 @@
         descripcion: "Una fragancia amaderada aromática unisex que presenta una mezcla vibrante y dulce con un toque oriental moderno y sofisticado.",
         notas: "Manzana, lichi, rosa, ciruela, jazmín, vainilla, musgo y pachulí.",
         recomendado: "Día o la noche, especialmente en climas cálidos, o para quienes buscan una fragancia dulce, frutal y con un fondo amaderado y terroso elegante y duradero.",
-        imagen: "https://lattafa.com/wp-content/uploads/2024/05/2-97.jpg",
+        imagen: "https://lattafa.com/wp-content/uploads/2024/05/1-97.jpg",
         versiones: [
           { nombre: "1.1 Premium", precio: 140000 },
           { nombre: "Original", precio: 230000 }
@@ -3505,7 +3553,7 @@
         descripcion: "Una fragancia ámbar vainilla unisex que presenta una mezcla opulenta y dulce con un toque oriental dorado y delicioso. ",
         notas: "Piña, crème brûlée, cúrcuma, canela, pimienta negra, benjuí, vainilla, cachemira, sándalo y musgo.",
         recomendado: "Noche o climas más frescos, para quienes buscan una fragancia dulce, cálida, especiada y con un toque gourmand cremoso y duradero.",
-        imagen: "https://lattafa.com/wp-content/uploads/2024/05/3-120.jpg",
+        imagen: "https://lattafa.com/wp-content/uploads/2024/05/1-120.jpg",
         versiones: [
           { nombre: "1.1 Premium", precio: 140000 },
           { nombre: "Original", precio: 240000 }
@@ -3518,7 +3566,7 @@
         descripcion: "Una fragancia floral frutal gourmand unisex que presenta una mezcla dulce y encantadora con un toque oriental suave y sofisticado",
         notas: "Ámbar, madera de cedro, vainilla, especias.",
         recomendado: "Eventos formales, noches frías.",
-        imagen: "https://dopaminashop.com.ec/wp-content/uploads/2024/12/EE.png",
+        imagen: "https://lattafa.com/wp-content/uploads/2024/10/Badee-Al-Oud-Noble-Blush-scaled.jpg",
         versiones: [
           { nombre: "1.1 Premium", precio: 140000 },
           { nombre: "Original", precio: 300000 }
@@ -4633,7 +4681,7 @@
         descripcion: "Una fragancia ámbar amaderada oriental para hombre que presenta una dulzura cálida y distintiva, evocando una sensación de individualidad, sofisticación y sensualidad cálida con un toque dulce y moderno.",
         notas: "Canela, lavanda, menta, bergamota, cardamomo, cilantro, jazmín, violeta, geranio, naranja, vainilla, sándalo, pachulí, almizcle, frambuesa, vetiver, chocolate negro, incienso, cuero, piña.",
         recomendado: "Noche y climas frescos, perfecta para quienes buscan una fragancia dulce, cálida y especiada con una estela distintiva y sensual para citas románticas o salidas nocturnas donde desees dejar una impresión memorable.",
-        imagen: "https://cdn-khglf.nitrocdn.com/CWVvcOztbqQIesFhYcTHdQcMmGhozsWp/assets/images/optimized/rev-95cb7d5/i0.wp.com/irisfragancias.com/wp-content/uploads/2021/08/15e2bce6a84d4a9b1a9a01bbc38183ba.mont-blanc-individuel-1.jpg",
+        imagen: "https://disfragancias.com/cdn/shop/products/Individuel.jpg?v=1699806172",
         versiones: [
           { nombre: "Original", precio: 190000 }
         ]
@@ -5532,7 +5580,7 @@
         descripcion: "Una fragancia amaderada acuática para hombre que presenta una frescura vibrante y deportiva, evocando una sensación de victoria, fuerza y una masculinidad atlética y refrescante con un toque dulce y amaderado marino.",
         notas: "Pomelo, notas marinas, mandarina, laurel, jazmín, madera de gaiac, musgo de roble, pachulí, ámbar gris.",
         recomendado: "Día y actividades deportivas, perfecta para quienes buscan una fragancia fresca, acuática y amaderada con una estela enérgica y masculina para cualquier ocasión informal o para sentirse revitalizado y con espíritu ganador.",
-        imagen: "https://www.perfumeriabasic.com/cdn/shop/products/INVICTUS.png?v=1682030077",
+        imagen: "https://disfragancias.com/cdn/shop/files/Paco-Rabanne-Invictus-2.jpg?v=1699644488",
         versiones: [
           { nombre: "1.1 Premium", precio: 110000 },
           { nombre: "Original", precio: 390000 }
@@ -5545,7 +5593,7 @@
         descripcion: "Una fragancia amaderada aromática para hombre que presenta una intensidad vibrante y sofisticada, evocando una sensación de poder moderno, confianza y una masculinidad elegante y duradera con un toque herbal fresco y amaderado intenso.",
         notas: "Pomelo, absenta, lavanda, musgo de roble, pachulí, ciprés.",
         recomendado: "Día y noche, perfecta para quienes buscan una fragancia aromática, amaderada y fresca con una estela potente y sofisticada para cualquier ocasión donde desees sentirte seguro y con un toque de distinción.",
-        imagen: "https://luryx.com.co/pub/media/catalog/product/cache/17a2882685dcb778cb02abe71b33b15c/p/a/paco_rabanne_invictus_platinum_edp_100ml_1.jpg",
+        imagen: "https://disfragancias.com/cdn/shop/products/Invictus-platinum-2.jpg?v=1699806627",
         versiones: [
           { nombre: "Original", precio: 430000 }
         ]
@@ -5716,7 +5764,7 @@
         descripcion: "Una fragancia amaderada aromática para hombre que presenta una sofisticación moderna y urbana, evocando una sensación de elegancia contemporánea, confianza y una presencia fresca, afrutada y amaderada con un toque exótico y sensual. ",
         notas: "Mango, salvia, pachulí, artemisia, hediona, sándalo, haba tonka, almizcle. ",
         recomendado: "Día y noche, perfecta para quienes buscan una fragancia fresca, afrutada y amaderada con una estela moderna y sofisticada para cualquier ocasión donde desees sentirte elegante, seguro y con un toque exótico.",
-        imagen: "https://luryx.com.co/pub/media/catalog/product/cache/17a2882685dcb778cb02abe71b33b15c/s/2/s2352502-1.png",
+        imagen: "https://www.myperfumeshop.co.nz/cdn/shop/products/ralph-lauren-polo-black-edt-perfume-cologne-684312.png?v=1679262189",
         versiones: [
           { nombre: "Original", precio: 330000 }
         ]
@@ -5728,7 +5776,7 @@
         descripcion: "Una fragancia aromática fougère para hombre que presenta una frescura limpia y relajante, evocando una sensación de libertad, sofisticación casual y una presencia fresca, afrutada y ligeramente herbal con un toque limpio y confortable.",
         notas: "Melón de Cavaillon, mandarina, pepino, albahaca, salvia, geranio, almizcle, notas amaderadas, gamuza.",
         recomendado: "Día y climas cálidos, perfecta para quienes buscan una fragancia fresca, afrutada y aromática con una estela limpia y relajante para cualquier ocasión informal o para sentirse fresco y con un toque de elegancia casual.",
-        imagen: "https://luryx.com.co/pub/media/catalog/product/cache/17a2882685dcb778cb02abe71b33b15c/s/1/s1755802-1.png",
+        imagen: "https://www.myperfumeshop.co.nz/cdn/shop/products/ralph-lauren-polo-blue-edt-perfume-for-him-659803.png?v=1609925628&width=600",
         versiones: [
           { nombre: "1.1 Premium", precio: 110000 },
           { nombre: "Original", precio: 270000 }
@@ -5741,7 +5789,7 @@
         descripcion: "Una fragancia amaderada aromática para hombre que presenta una intensidad enérgica y apasionada, evocando una sensación de velocidad, audacia y una masculinidad vibrante y seductora con un toque dulce, especiado y amaderado cálido.",
         notas: "Pomelo rojo, limón italiano, arándano rojo, azafrán, salvia roja, secuoya roja, ámbar, granos de café.",
         recomendado: "Día y noche, perfecta para quienes buscan una fragancia con una estela dulce, especiada y amaderada con una personalidad enérgica y atractiva para cualquier ocasión donde desees sentirte audaz, seguro y con un toque de pasión.",
-        imagen: "https://luryx.com.co/pub/media/catalog/product/cache/17a2882685dcb778cb02abe71b33b15c/s/0/s0962200.png",
+        imagen: "https://www.myperfumeshop.co.nz/cdn/shop/products/ralph-lauren-polo-red-edt-perfume-cologne-729506.png?v=1679354863&width=600",
         versiones: [
           { nombre: "Original", precio: 330000 }
         ]
@@ -5753,7 +5801,7 @@
         descripcion: "Una fragancia chipre amaderada para hombre que presenta una sofisticación atemporal y masculina, evocando una sensación de tradición, elegancia clásica y una presencia fuerte, terrosa y amaderada con un toque verde y ahumado.",
         notas: "Pino, cuero, tabaco, lavanda, enebro, albahaca, vetiver, pachulí, musgo de roble, cedro, clavel, manzanilla, geranio, pimienta negra, ámbar.",
         recomendado: "Día y ocasiones formales, perfecta para quienes buscan una fragancia amaderada, verde y cuero con una estela clásica y sofisticada para cualquier evento donde desees sentirte elegante, seguro y con un toque de tradición.",
-        imagen: "https://perfumeriacristlaurent.com/wp-content/uploads/2023/08/Perfume-Polo-Green-de-Ralph-Lauren-2.jpg",
+        imagen: "https://www.myperfumeshop.co.nz/cdn/shop/products/ralph-lauren-polo-green-edt-for-men-perfume-cologne-211654.png?v=1702803283&width=600",
         versiones: [
           { nombre: "Original", precio: 270000 }
         ]
@@ -5765,7 +5813,7 @@
         descripcion: "Una fragancia floral amaderada almizclada para mujer que presenta una elegancia sofisticada y moderna, evocando una sensación de feminidad fuerte, gracia y una presencia floral blanca rica y envolvente con un toque dulce y amaderado suave. ",
         notas: "Pera, ruibarbo, grosella negra, nardo, flor de azahar del naranjo, rosa turca, sándalo, avellana, cachemira, violeta, jazmín.",
         recomendado: "Día y noche, perfecta para quienes buscan una fragancia floral blanca sofisticada y elegante con una estela rica y duradera para cualquier ocasión donde desees sentirte femenina, segura y con un toque de lujo moderno",
-        imagen: "https://luryx.com.co/pub/media/catalog/product/cache/17a2882685dcb778cb02abe71b33b15c/s/0/s0960302-1_1.png",
+        imagen: "https://www.myperfumeshop.co.nz/cdn/shop/products/ralph-lauren-edt-for-women-perfume-cologne-473118.png?v=1679354861&width=600",
         versiones: [
           { nombre: "1.1 Premium", precio: 110000 },
           { nombre: "Original", precio: 350000 }
@@ -6180,7 +6228,7 @@
         descripcion: "Una fragancia floral que presenta una intensidad luminosa y sofisticada, evocando una sensación de feminidad radiante, sofisticación intensa y una presencia floral dulce y ligeramente frutal con un toque amaderado cálido y envolvente.",
         notas: "Cidra, pera, neroli, bergamota, flor de azahar, fresia, jazmín, osmanthus, madera de gaiac, almizcle, ámbar, benjuí.",
         recomendado: "Día y noche, perfecta para quienes buscan una fragancia floral dulce y cítrica con una estela vibrante y duradera para cualquier ocasión donde desees sentirte femenina, segura y con un toque de sofisticación intensa.",
-        imagen: "https://luryx.com.co/pub/media/catalog/product/cache/17a2882685dcb778cb02abe71b33b15c/5/2/521032-1.png",
+        imagen: "https://static.thcdn.com/productimg/1600/1600/11034093-5954533775707723.jpg",
         versiones: [
           { nombre: "Original", precio: 350000 }
         ]
@@ -6229,7 +6277,7 @@
         descripcion: "Una fragancia amaderada especiada que presenta una robustez terrosa y masculina, evocando una sensación de fuerza natural, aventura y una presencia verde, especiada y ligeramente resinosa con un toque terroso y duradero.",
         notas: "Ciprés, hojas de higuera, nuez moscada, comino, pimienta negra, pachulí, cedro, benjuí.",
         recomendado: "Día y noche, perfecta para quienes buscan una fragancia verde, especiada y amaderada con una estela terrosa y masculina para cualquier ocasión donde desees sentirte seguro, aventurero y con un toque de fuerza natural .",
-        imagen: "https://luryx.com.co/pub/media/catalog/product/cache/17a2882685dcb778cb02abe71b33b15c/4/0/40232.png",
+        imagen: "https://essenzaperfumes.cr/wp-content/uploads/2021/10/SWISS-ROCK-by-Swiss-Army-Victorinox.jpg",
         versiones: [
           { nombre: "Original", precio: 170000 }
         ]
@@ -6337,7 +6385,7 @@
         descripcion: "Una fragancia cítrica aromática amaderada unisex que presenta una frescura vibrante y sofisticada, evocando una sensación de dinamismo elegante, energía refrescante y una presencia cítrica verde, aromática y ligeramente especiada con un toque amaderado limpio y moderno.",
         notas: "Eucalipto, bergamota, azafrán, notas acuáticas, salvia esclarea, mate, cardamomo, vetiver, pachulí, madera de gaiac.",
         recomendado: "Día y noche, perfecta para quienes buscan una fragancia fresca, cítrica y amaderada con una estela vibrante y sofisticada para cualquier ocasión donde desees sentirte enérgico, seguro y con un toque de elegancia moderna.",
-        imagen: "https://abushakra.com/media/catalog/product/cache/18c599600537a9a88e17d7fa5b5aa48c/8/0/8054320901877-main.jpg",
+        imagen: "https://cdn-khglf.nitrocdn.com/CWVvcOztbqQIesFhYcTHdQcMmGhozsWp/assets/images/optimized/rev-451aa70/i0.wp.com/irisfragancias.com/wp-content/uploads/2021/08/4cffffb42d1ecba7485608021ee61702.more-than-words.png",
         versiones: [
           { nombre: "Original", precio: 750000 }
         ]
@@ -6486,6 +6534,7 @@
           { nombre: "Original", precio: 500000 }
         ]
       },
+ 
     ];
     
     // Variables para la paginación
@@ -6529,19 +6578,14 @@
     // Función para buscar perfumes
     function searchPerfumes(query) {
       const normalizedQuery = normalizeText(query.trim());
-      
+
       if (normalizedQuery === '') {
         return [];
       }
-      
+
       return perfumes.filter(perfume => {
         const normalizedNombre = normalizeText(perfume.nombre);
-        const normalizedDesc = normalizeText(perfume.descripcion);
-        const normalizedNotas = normalizeText(perfume.notas);
-        
-        return normalizedNombre.includes(normalizedQuery) || 
-               normalizedDesc.includes(normalizedQuery) || 
-               normalizedNotas.includes(normalizedQuery);
+        return normalizedNombre.includes(normalizedQuery);
       });
     }
 
