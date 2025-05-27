@@ -6,7 +6,7 @@
   <title>Aroméa</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
   <style>
     /* Variables CSS */
@@ -20,6 +20,9 @@
       --delete: #ff3b30;
       --accent: #555555;
       --accent-light: #f5f5f5;
+      --modal-overlay: rgba(0,0,0,0.7);
+      --font-perfume-name: 'Outfit', sans-serif; /* Variable para la fuente del nombre del perfume */
+      --font-weight-perfume-name: 700;
     }
     
     /* Estilos básicos */
@@ -31,7 +34,7 @@
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      padding-bottom: 60px; /* Espacio para el footer fijo */
+      padding-bottom: 60px; 
       position: relative;
     }
     
@@ -48,10 +51,10 @@
     .underline {
       border-bottom: 2px solid white;
       padding-bottom: 0;
-      line-height: 0.5; /* reduce el espacio vertical */
+      line-height: 0.5;
     }
     
-    /* Estilos del encabezado y el logo */
+    /* Encabezado y logo */
     header {
       background: var(--bg);
       text-align: center;
@@ -61,19 +64,8 @@
       top: 0;
       z-index: 10;
     }
-    
-    /* Estilos específicos para el logo */
-    .logo-container {
-      margin: 0 auto 1rem;
-      max-width: 300px;
-    }
-    
-    .logo-img {
-      width: 100%;
-      height: auto;
-      max-height: 80px;
-      object-fit: contain;
-    }
+    .logo-container { margin: 0 auto 1rem; max-width: 300px; }
+    .logo-img { width: 100%; height: auto; max-height: 80px; object-fit: contain; }
     
     /* Barra de navegación */
     nav {
@@ -82,16 +74,14 @@
       justify-content: center;
       flex-wrap: wrap;
       gap: 10px;
+      align-items: center;
     }
-    
-    /* Estilos para la barra de búsqueda */
     .search-container {
       position: relative;
-      margin-right: 10px;
-      flex-grow: 1;
-      max-width: 300px;
+      flex-grow: 1; 
+      flex-shrink: 1; 
+      max-width: 300px; 
     }
-    
     .search-input {
       width: 100%;
       padding: 0.75rem 1.5rem;
@@ -102,11 +92,10 @@
       background: var(--bg);
       color: var(--text);
     }
-    
     .search-results {
       position: absolute;
       width: 100%;
-      max-height: 300px;
+      max-height: 0; 
       overflow-y: auto;
       background: var(--bg);
       border: 1px solid var(--border);
@@ -114,15 +103,12 @@
       border-radius: 0 0 8px 8px;
       box-shadow: 0 8px 16px var(--shadow);
       z-index: 100;
-      display: none;
+      opacity: 0; 
+      visibility: hidden; 
+      transition: opacity 0.3s ease, max-height 0.3s ease, visibility 0.3s ease;
     }
-    
-    .search-results.active {
-      display: block;
-    }
-    
-    nav select,
-    nav button {
+    .search-results.active { opacity: 1; visibility: visible; max-height: 300px; }
+    nav select, nav button {
       font-family: inherit;
       padding: 0.75rem 1.5rem;
       font-size: 1rem;
@@ -131,406 +117,214 @@
       background: var(--bg);
       color: var(--text);
       cursor: pointer;
+      flex-shrink: 0;
     }
-    
-    nav button:hover {
-      background: var(--text);
-      color: var(--button-text);
-    }
+    nav button:hover { background: var(--text); color: var(--button-text); }
     
     /* Contenido principal */
-    main {
-      flex: 1;
-      padding: 2rem 1rem;
-      max-width: 1200px;
-      margin: 0 auto;
-      width: 100%;
-    }
-    
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 2rem;
-    }
+    main { flex: 1; padding: 2rem 1rem; max-width: 1200px; margin: 0 auto; width: 100%; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 2rem; }
 
-    
-
+    /* --- ESTILOS RESPONSIVE --- */
     @media (max-width: 480px) {
-      .card-content {
-        padding: 1rem;
-        gap: 1rem;
-      }
-
-      .card-content h2 {
-        font-size: 1.2rem;
-      }
-
-      .card-price {
-        font-size: 1rem;
-      }
-
-      .card-content select,
-      .card-content button {
-        font-size: 0.9rem;
-        padding: 0.6rem;
-      }
-
-      .search-container,
-      nav select,
-      nav button {
-        font-size: 0.9rem;
-        padding: 0.5rem 1rem;
-      }
-
-      .grid {
-        gap: 1rem;
-        padding: 0 0.5rem;
-      }
+      .card-content { padding: 1rem; gap: 1rem; }
+      .card-content h2 { font-size: 1.2rem; }
+      .card-price { font-size: 1rem; }
+      .card-content select, .card-content button { font-size: 0.9rem; padding: 0.6rem; }
+      .search-input, nav select, nav button { font-size: 0.9rem; padding: 0.6rem 1rem; } 
+      .grid { gap: 1rem; padding: 0 0.5rem; }
+      .modal-content { padding: 1.5rem; } 
+      .modal-header h3 { font-size: 1.5rem; } /* Ajustar si la nueva fuente lo requiere */
+      nav select, nav button { flex-grow: 1; }
     }
 
-    .search-container,
-    nav select,
-    nav button {
-      font-size: 0.9rem;
-      padding: 0.5rem 1rem;
-    }
-
-    .grid {
-      gap: 1rem;
-      padding: 0 0.5rem;
-    }
-  
-    
-    /* Estilos responsivos para la grid */
-    @media (min-width: 600px) {
-      .grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    
-    @media (min-width: 900px) {
-      .grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-    
-    @media (min-width: 1200px) {
-      .grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
-    
-    /* Estilos para dispositivos móviles */
     @media (max-width: 768px) {
-      .logo-img {
-        max-height: 60px;
-      }
-      
+      .logo-img { max-height: 60px; }
       .search-container {
-        max-width: 100%;
+        width: 100%; 
+        max-width: 100%; 
+        margin-right: 0; 
+        order: -1; 
       }
-      
-      .whatsapp-float {
-        bottom: 15px;
-        right: 15px;
-      }
-      
-      .whatsapp-button {
-        width: 50px;
-        height: 50px;
-        font-size: 24px;
-      }
-      
-      .whatsapp-bubble {
-        font-size: 12px;
-        padding: 8px 12px;
-      }
+      nav select, nav button { flex-grow: 1; }
+      .whatsapp-float { bottom: 15px; right: 15px; }
+      .whatsapp-button { width: 50px; height: 50px; font-size: 24px; }
+      .whatsapp-bubble { font-size: 12px; padding: 8px 12px; }
     }
     
-    /* Estilos para el botón de WhatsApp */
-    .whatsapp-float {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      z-index: 1000;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-    }
+    @media (min-width: 600px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 900px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 1200px) { .grid { grid-template-columns: repeat(4, 1fr); } }
     
-    .whatsapp-bubble {
-      background-color: #fff;
-      color: #333;
-      padding: 10px 15px;
-      border-radius: 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-      font-size: 14px;
-      font-weight: 500;
-      white-space: nowrap;
-      margin-bottom: 10px;
-      position: relative;
-      opacity: 1;
-      transform: translateY(0);
-      transition: opacity 0.3s ease;
-    }
+    .whatsapp-float { position: fixed; bottom: 25px; right: 25px; z-index: 1000; display: flex; flex-direction: column; align-items: flex-end; }
+    .whatsapp-bubble { background-color: #fff; color: #333; padding: 10px 15px; border-radius: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); font-size: 14px; font-weight: 500; white-space: nowrap; margin-bottom: 10px; position: relative; opacity: 1; transform: translateY(0); transition: opacity 0.3s ease; }
+    .whatsapp-bubble:after { content: ''; position: absolute; bottom: -8px; right: 24px; width: 16px; height: 16px; background-color: #fff; transform: rotate(45deg); box-shadow: 2px 2px 2px rgba(0,0,0,0.1); }
+    .whatsapp-button { display: flex; justify-content: center; align-items: center; width: 60px; height: 60px; background-color: #25D366; color: white; border-radius: 50%; font-size: 30px; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3); transition: all 0.3s; }
+    .whatsapp-button:hover { background-color: #20c25b; transform: scale(1.05); }
+    .whatsapp-bubble.fade { opacity: 0; }
     
-    .whatsapp-bubble:after {
-      content: '';
+    .card { background: var(--bg); border-radius: 12px; overflow: hidden; box-shadow: 0 8px 16px var(--shadow); border: 1px solid var(--border); transition: transform 0.3s, box-shadow 0.3s; height: 100%; display: flex; flex-direction: column; }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 16px 32px var(--shadow); }
+    .card img { width: 100%; height: 280px; object-fit: contain; background-color: #f9f9f9; padding: 10px; }
+    .card-content { padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; flex: 1; }
+    .card-content h2 { 
+      font-family: var(--font-perfume-name); /* Usando variable */
+      font-weight: var(--font-weight-perfume-name); /* Usando variable */
+      font-size: 1.5rem; 
+      color: var(--text); 
+      margin-bottom: 0.5rem; 
+    }
+    .card-basic-info { display: flex; flex-direction: column; gap: 1rem; }
+    .card-price { font-weight: bold; font-size: 1.2rem; color: var(--accent); }
+    .card-details { max-height: 0; overflow: hidden; transition: max-height 0.5s ease, padding 0.5s ease, margin 0.5s ease, border-top-width 0.5s ease; padding: 0; border-top: 0px solid var(--border); margin-top: 0; }
+    .card-details.expanded { max-height: 500px; overflow: visible; border-top: 1px solid var(--border); margin-top: 1rem; padding-top: 1rem; }
+    .toggle-details { background: var(--accent-light); color: var(--accent); border: 1px solid var(--border); border-radius: 8px; padding: 0.5rem; cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+    .toggle-details:hover { background: var(--border); }
+    .toggle-details i { margin-left: 8px; transition: transform 0.3s; }
+    .toggle-details.expanded i { transform: rotate(180deg); }
+    .card-content select, .card-content button.add-to-cart { padding: 0.75rem; font-family: inherit; font-size: 1rem; }
+    .card-content select { border: 1px solid var(--text); border-radius: 6px; background: var(--bg); color: var(--text); }
+    .card-content button.add-to-cart { background: var(--button); color: var(--button-text); border: none; border-radius: 8px; font-weight: 600; cursor: pointer; margin-top: auto; }
+    .card-content button.add-to-cart:hover { background: #222; }
+    .card-details p { margin-bottom: 0.75rem; }
+    
+    .footer { background: var(--bg); color: var(--text); text-align: center; padding: 1rem; font-size: 0.9rem; border-top: 1px solid var(--border); position: fixed; bottom: 0; width: 100%; z-index: 100; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
+    .footer a { color: var(--text); text-decoration: underline; }
+    .footer a:hover { color: #444; }
+    
+    /* --- MODALES (Genérico, Bienvenida, Carrito) --- */
+    .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--modal-overlay); display: none; justify-content: center; align-items: center; z-index: 1001; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0s 0.3s linear; }
+    .modal-overlay.active { display: flex; opacity: 1; visibility: visible; transition: opacity 0.3s ease, visibility 0s 0s linear; }
+    .modal-content { background: white; padding: 2rem; border-radius: 12px; max-width: 600px; width: 90%; max-height: 85vh; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.15); transform: scale(0.95) translateY(10px); transition: transform 0.3s ease, opacity 0.3s ease; opacity: 0; position: relative; }
+    .modal-overlay.active .modal-content { transform: scale(1) translateY(0); opacity: 1; }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); position: relative; z-index: 3; }
+    
+    /* ==== MODIFICACIÓN DE TIPOGRAFÍA PARA TÍTULOS DE MODAL ==== */
+    .modal-header h3 {
+      font-family: var(--font-perfume-name); /* Usando la misma fuente que los nombres de perfume */
+      font-weight: var(--font-weight-perfume-name); /* Usando el mismo peso */
+      font-size: 1.7rem; /* Ajustar tamaño si es necesario, 'Outfit' es menos condensada que 'Anton' */
+      margin: 0;
+      /* El color se define específicamente abajo para el modal de bienvenida si tiene fondo */
+      color: var(--text); /* Color por defecto para modales sin fondo especial */
+    }
+    /* ========================================================= */
+
+    .modal-close-btn { font-size: 1.8rem; font-weight: bold; color: var(--accent); background: none; border: none; cursor: pointer; padding: 0.25rem 0.5rem; line-height: 1; position: relative; z-index: 3; }
+    .modal-close-btn:hover { color: var(--text); }
+
+    /* Modal de Bienvenida con Fondo */
+    #welcomeModal .modal-content {
+      /* REEMPLAZA LA SIGUIENTE LÍNEA CON LA URL DE TU IMAGEN DE PERFUMES */
+      background-image: url('https://i.pinimg.com/736x/a8/61/89/a86189b51e097e268c7491ae9a784910.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+    #welcomeModal .modal-content::before {
+      content: "";
       position: absolute;
-      bottom: -8px;
-      right: 24px;
-      width: 16px;
-      height: 16px;
-      background-color: #fff;
-      transform: rotate(45deg);
-      box-shadow: 2px 2px 2px rgba(0,0,0,0.1);
-    }
-    
-    .whatsapp-button {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 60px;
-      height: 60px;
-      background-color: #25D366;
-      color: white;
-      border-radius: 50%;
-      font-size: 30px;
-      text-decoration: none;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      transition: all 0.3s;
-    }
-    
-    .whatsapp-button:hover {
-      background-color: #20c25b;
-      transform: scale(1.05);
-    }
-    
-    .whatsapp-bubble.fade {
-      opacity: 0;
-    }
-    
-    /* Estilos para las tarjetas colapsables */
-    .card {
-      background: var(--bg);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 8px 16px var(--shadow);
-      border: 1px solid var(--border);
-      transition: transform 0.3s, box-shadow 0.3s;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 16px 32px var(--shadow);
-    }
-    
-    .card img {
-      width: 100%;
-      height: 280px;
-      object-fit: contain;
-      background-color: #f9f9f9;
-      padding: 10px;
-    }
-    
-    .card-content {
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      flex: 1;
-    }
-    
-    .card-content h2 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.5rem;
-      color: var(--text);
-      margin-bottom: 0.5rem;
-    }
-    
-    .card-basic-info {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    
-    .card-price {
-      font-weight: bold;
-      font-size: 1.2rem;
-      color: var(--accent);
-    }
-    
-    .card-details {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.5s ease;
-      padding: 0;
-      border-top: 0px solid var(--border);
-      margin-top: 0;
-    }
-    
-    .card-details.expanded {
-      max-height: none; /* permite que se expanda completamente */
-      overflow: visible;
-      border-top: 1px solid var(--border);
-      margin-top: 1rem;
-      padding-top: 1rem;
-    }
-    
-    .toggle-details {
-      background: var(--accent-light);
-      color: var(--accent);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 0.5rem;
-      cursor: pointer;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s;
-    }
-    
-    .toggle-details:hover {
-      background: var(--border);
-    }
-    
-    .toggle-details i {
-      margin-left: 8px;
-      transition: transform 0.3s;
-    }
-    
-    .toggle-details.expanded i {
-      transform: rotate(180deg);
-    }
-    
-    .card-content select,
-    .card-content button.add-to-cart {
-      padding: 0.75rem;
-      font-family: inherit;
-      font-size: 1rem;
-    }
-    
-    .card-content select {
-      border: 1px solid var(--text);
-      border-radius: 6px;
-      background: var(--bg);
-      color: var(--text);
-    }
-    
-    .card-content button.add-to-cart {
-      background: var(--button);
-      color: var(--button-text);
-      border: none;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: auto;
-    }
-    
-    .card-content button.add-to-cart:hover {
-      background: #222;
-    }
-    
-    .card-details p {
-      margin-bottom: 0.75rem;
-    }
-    
-    /* Footer y otros estilos */
-    .footer {
-      background: var(--bg);
-      color: var(--text);
-      text-align: center;
-      padding: 1rem;
-      font-size: 0.9rem;
-      border-top: 1px solid var(--border);
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      z-index: 100;
-      box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
-    }
-    
-    .footer a {
-      color: var(--text);
-      text-decoration: underline;
-    }
-    
-    .footer a:hover {
-      color: #444;
-    }
-    
-    #cartModal {
-      position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.6);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
+      background-color: rgba(0, 0, 0, 0.65); 
+      border-radius: 12px; 
+      z-index: 1; 
     }
-    
-    .cart-content {
-      background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      max-width: 600px;
-      width: 90%;
-      max-height: 80vh;
-      overflow-y: auto;
+    #welcomeModal .modal-header,
+    #welcomeModal .modal-content p,
+    #welcomeModal .welcome-actions {
+      position: relative;
+      z-index: 2; 
     }
-    
-    .pagination {
-      display: flex;
-      justify-content: center;
-      margin-top: 3rem;
-      margin-bottom: 1rem;
-      flex-wrap: wrap;
-      gap: 8px;
+    #welcomeModal .modal-header h3, /* Hereda fuente de .modal-header h3 pero sobreescribe color */
+    #welcomeModal .modal-content p {
+      color: #ffffff; 
     }
+    #welcomeModal .modal-close-btn { color: #f0f0f0; } /* Color específico para botón X en modal bienvenida */
+    #welcomeModal .modal-close-btn:hover { color: #ffffff; }
     
-    #noResults {
+    /* ==== MODIFICACIÓN ESPACIADO BOTÓN MODAL BIENVENIDA ==== */
+    #welcomeModal .welcome-actions {
       text-align: center;
-      padding: 3rem 1rem;
-      color: #666;
-      font-style: italic;
+      margin-top: 2rem; /* Aumentado de 1rem a 2rem */
     }
-    .search-result-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px;
-    border-bottom: 1px solid var(--border);
-    cursor: pointer;
-    }
+    /* ====================================================== */
 
-    .search-result-item img {
-      width: 50px;
-      height: 50px;
-      object-fit: contain;
-      border-radius: 4px;
+    #welcomeModal .welcome-actions button { 
+      font-family: 'Outfit', sans-serif; padding: 0.85rem 2.5rem; font-size: 1.1rem; 
+      border-radius: 8px; background: var(--button-text); 
+      color: var(--button); 
+      border: none; cursor: pointer; font-weight: 600; transition: background-color 0.2s ease, color 0.2s ease;
     }
+    #welcomeModal .welcome-actions button:hover { background: #f0f0f0; }
 
-    .search-result-name {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--text);
-    }
+    /* Carrito de Compras */
+    .cart-items { margin-bottom: 1.5rem; }
+    .cart-item { display: flex; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--border); }
+    .cart-item:last-child { border-bottom: none; }
+    .cart-item-image { width: 70px; height: 70px; object-fit: contain; border-radius: 8px; margin-right: 15px; border: 1px solid var(--border); }
+    .cart-item-details { flex-grow: 1; display: flex; justify-content: space-between; align-items: center; }
+    .cart-item-name { font-weight: 600; font-size: 1.1rem; margin-bottom: 0.25rem; }
+    .cart-item-version { font-size: 0.9rem; color: var(--accent); }
+    .cart-item-price { font-weight: bold; font-size: 1.1rem; margin-left: 1rem; }
+    .cart-item-remove { background: none; border: none; color: var(--delete); font-size: 1.3rem; cursor: pointer; padding: 0.5rem; margin-left: 1rem; }
+    .cart-item-remove:hover { color: #c00; }
+    .cart-total { display: flex; justify-content: space-between; align-items: center; font-size: 1.3rem; font-weight: bold; padding-top: 1rem; border-top: 2px solid var(--text); margin-bottom: 1.5rem; }
+    .cart-actions { display: flex; justify-content: space-between; gap: 1rem; }
+    .cart-actions button, .cart-actions a { flex-grow: 1; padding: 0.75rem 1rem; font-family: inherit; font-size: 1rem; border-radius: 8px; text-align: center; text-decoration: none; font-weight: 600; cursor: pointer; transition: background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease; }
+    .cart-actions button { background: var(--accent-light); color: var(--accent); border: 1px solid var(--border); }
+    .cart-actions button:hover { background: var(--border); }
+    .cart-actions a { background: #25D366; color: white; border: none; }
+    .cart-actions a:hover { background: #20c25b; }
+    .cart-actions a i { margin-right: 0.5rem; }
+    .cart-empty { text-align: center; padding: 3rem 1rem; color: #777; }
+    .cart-empty i { font-size: 3.5rem; margin-bottom: 1rem; display: block; color: var(--border); }
+    .cart-empty p { font-size: 1.2rem; }
+
+    /* Paginación y Resultados de Búsqueda */
+    .pagination { display: flex; justify-content: center; margin-top: 3rem; margin-bottom: 1rem; flex-wrap: wrap; gap: 8px; }
+    .pagination button { font-family: inherit; padding: 0.6rem 1rem; font-size: 0.9rem; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--text); cursor: pointer; transition: background-color 0.2s, color 0.2s; }
+    .pagination button:hover:not(:disabled) { background: var(--accent-light); }
+    .pagination button.active { background: var(--text); color: var(--button-text); border-color: var(--text); }
+    .pagination button:disabled { opacity: 0.5; cursor: default; }
+    #noResults { text-align: center; padding: 3rem 1rem; color: #666; font-style: italic; font-size: 1.1rem; }
+    .search-result-item { display: flex; align-items: center; gap: 10px; padding: 10px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background-color 0.2s ease; }
+    .search-result-item:last-child { border-bottom: none; }
+    .search-result-item:hover { background-color: var(--accent-light); }
+    .search-result-item img { width: 50px; height: 50px; object-fit: contain; border-radius: 4px; }
+    .search-result-name { font-size: 1rem; font-weight: 600; color: var(--text); }
+    .search-related-text { padding: 12px 10px; font-style: italic; color: var(--accent); border-bottom: 1px solid var(--border); cursor: default; font-size: 0.9rem; }
+    .search-no-results { padding: 15px 10px; text-align: center; color: #777; }
+    .search-no-results i { margin-right: 8px; color: var(--accent); }
+
+    /* Animaciones */
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .product-card { animation: fadeIn 0.5s ease-out forwards; opacity: 0; }
+    
   </style>
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-  <!-- Banner de envío gratis -->
+
+  <div id="welcomeModal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>¡Bienvenido a Aroméa!</h3>
+        <button class="modal-close-btn" onclick="hideWelcomeModal()">&times;</button>
+      </div>
+      <p>
+        Somos una tienda de perfumes apasionada por las fragancias. 
+        Ofrecemos una cuidada selección de perfumes con calidad 1.1 y originales de diversas marcas. 
+        ¡Explora nuestro catálogo y encuentra tu aroma ideal!
+      </p>
+      <div class="welcome-actions">
+        <button onclick="hideWelcomeModal()">Empezar a comprar</button>
+      </div>
+    </div>
+  </div>
+
   <div class="free-shipping-banner">
-    🎁 ¡Envío GRATIS en <span class="underline">Medellín</span>! 🎁
+    🎁 ¡Pago contra entrega en <span class="underline">Medellín</span>! 🎁
   </div>
   
   <header>
-    <!-- Aquí va el logo en lugar del texto "Aroméa" -->
     <div class="logo-container">
       <img src="img/story.png" alt="Aroméa" class="logo-img" id="logo-header">
     </div>
@@ -545,20 +339,22 @@
         <option value="disenador">Diseñador</option>
         <option value="nicho">Nicho</option>
       </select>
-      <button onclick="showCart()">Ver Carrito</button>
+      <button onclick="showCart()">Ver Carrito <i class="fas fa-shopping-cart"></i></button>
     </nav>
   </header>
   <main>
     <div class="grid" id="productGrid"></div>
-    <div id="noResults" style="display: none;">No se encontraron perfumes en esta categoría.</div>
+    <div id="noResults" style="display: none;"></div>
     <div class="pagination" id="pagination"></div>
   </main>
-  <div id="cartModal">
-    <div class="cart-content">
-      <h3>Carrito de Compras</h3>
-      <div id="cartItems" class="cart-items">
-        <!-- Cart items will be rendered here -->
+
+  <div id="cartModal" class="modal-overlay">
+    <div class="modal-content"> 
+      <div class="modal-header">
+        <h3>Carrito de Compras</h3>
+        <button class="modal-close-btn" onclick="hideCart()">&times;</button>
       </div>
+      <div id="cartItems" class="cart-items"></div>
       <div class="cart-total">
         <span class="cart-total-label">Total:</span>
         <span class="cart-total-value">$<span id="cartTotal">0</span></span>
@@ -566,13 +362,12 @@
       <div class="cart-actions">
         <button onclick="hideCart()">Seguir comprando</button>
         <a href="#" id="whatsappLink" target="_blank">
-          <i class="fab fa-whatsapp"></i>&nbsp; Finalizar compra
+          <i class="fab fa-whatsapp"></i>Finalizar compra
         </a>
       </div>
     </div>
   </div>
   
-  <!-- Botón flotante de WhatsApp con burbuja siempre visible -->
   <div class="whatsapp-float">
     <div class="whatsapp-bubble" id="whatsappBubble">¿Necesitas una asesoría?</div>
     <a href="https://wa.me/573023299774?text=Hola, necesito una asesoría sobre fragancias." class="whatsapp-button" target="_blank">
@@ -583,6 +378,7 @@
   <footer class="footer">
     <p>&copy; 2025 Aroméa. Hecho con ❤️ <br class="mobile-only"> Visítanos en <a href="https://instagram.com/aromea.col" target="_blank">@Aroméa</a></p>
   </footer>
+
   <script>
     const perfumes = [
       // PERFUME 1
@@ -599,7 +395,6 @@
           { nombre: "Original", precio: 240000 }
         ]
       },
-      
       // PERFUME 2
       {
         id: 2,
@@ -613,11 +408,11 @@
           { nombre: "Original", precio: 240000 }
         ]
       },
-            {
+      {
         id: 3,
         nombre: "9PM Femme",
         categoria: "arabe",
-        descripcion: "Una fragancia audaz e intensa que combina la fuerza de las maderas con la dulzura envolvente de las flores",
+        descripcion: "Una fragancia audaz e intensa que combina la fuerza de las maderas con la dulzura envolvente de las flores.",
         notas: "Frambuesa, manzana, flor de azahar, rosa, jazmín, vainilla, ámbar, almizcle, pachulí.",
         recomendado: "Noches especiales, cenas románticas o salidas elegantes. Dulce, femenina y envolvente.",
         imagen: "https://fimgs.net/mdimg/perfume/375x500.78544.jpg",
@@ -625,14 +420,13 @@
           { nombre: "Original", precio: 240000 }
         ]
       },
-      
-      // PERFUME 4 (Agregado para el ejemplo)
+      // PERFUME 4
       {
         id: 4,
         nombre: "Ahli Karpos",
         categoria: "nicho",
-        descripcion: "Un perfume que te invita a sumergirte en una experiencia olfativa que evoca la frescura tropical y la dulzura especiada",
-        notas: "Mango, limón, jengibre, bayas rojas, jazmín, cumarina, notas amaderadas, almizcle, madera de oud, ámbar, cipriol.​",
+        descripcion: "Un perfume que te invita a sumergirte en una experiencia olfativa que evoca la frescura tropical y la dulzura especiada.",
+        notas: "Mango, limón, jengibre, bayas rojas, jazmín, cumarina, notas amaderadas, almizcle, madera de oud, ámbar, cipriol.",
         recomendado: "Días cálidos de primavera o verano, eventos sociales al aire libre, fiestas tropicales o momentos en los que desees destacar con una fragancia exótica y envolvente.",
         imagen: "https://ahlifragrances.com/cdn/shop/files/KARPOS.webp?v=1729803194",
         versiones: [
@@ -640,9 +434,7 @@
           { nombre: "Original", precio: 420000 }
         ]
       },
-      
-      // PERFUME 5 (Agregado para el ejemplo)
-      {
+            {
         id: 5,
         nombre: "Ahli Vega",
         categoria: "nicho",
@@ -915,7 +707,7 @@
         descripcion: "El elegante y sofisticado eau de toilette te introducirá en el cautivador reino de la seducción.",
         notas: "Piña, bergamota, melón, toronja (pomelo), manzana verde, notas marinas, jazmín, cardamomo, neroli, vetiver, almizcle blanco, cedro, gamuza, ámbar.",
         recomendado: "Días calurosos de primavera y verano, actividades al aire libre o momentos en los que desees una fragancia fresca, frutal y acuática con un toque amaderado y elegante.",
-        imagen: "https://templustore.com/cdn/shop/files/CATALOGOPRODUCTOS_PostenInstagram_54.jpg?v=1719697666",
+        imagen: "https://pepeganga.vtexassets.com/arquivos/ids/440799-800-auto?v=637158143596130000&width=800&height=auto&aspect=true",
         versiones: [
           { nombre: "Original", precio: 150000 }
         ]
@@ -6555,384 +6347,270 @@
         versiones: [
           { nombre: "Original", precio: 500000 }
         ]
-      },
- 
+      }
     ];
     
-    // Variables para la paginación
-    const perPage = 12; // Número de perfumes por página
+    const perPage = 12;
     let currentPage = 1;
     let filteredPerfumes = [...perfumes];
-    
     const cart = [];
-    let cartId = 0;
+    let cartIdCounter = 0;
 
-    // Función para alternar mensaje de WhatsApp
+    const welcomeModalEl = document.getElementById('welcomeModal');
+    const cartModalEl = document.getElementById('cartModal'); 
+    const productGridEl = document.getElementById('productGrid');
+    const noResultsDivEl = document.getElementById('noResults');
+    const paginationDivEl = document.getElementById('pagination');
+    const searchInputEl = document.getElementById('searchInput');
+    const searchResultsContainerEl = document.getElementById('searchResults');
+    const categoryFilterSelectEl = document.getElementById('categoryFilter');
+    const cartItemsDivEl = document.getElementById('cartItems');
+    const cartTotalSpanEl = document.getElementById('cartTotal');
+    const whatsappLinkAnchorEl = document.getElementById('whatsappLink');
+    const whatsappBubbleEl = document.getElementById('whatsappBubble');
+
+    function showWelcomeModal() { if (welcomeModalEl) welcomeModalEl.classList.add('active'); }
+    function hideWelcomeModal() { if (welcomeModalEl) welcomeModalEl.classList.remove('active'); }
+
     function alternateWhatsAppMessage() {
-      const bubble = document.getElementById('whatsappBubble');
-      const messages = [
-        "¿Necesitas una asesoría?",
-        "¿No encuentras un perfume?"
-      ];
+      if (!whatsappBubbleEl) return;
+      const messages = ["¿Necesitas una asesoría?", "¿No encuentras un perfume?", "¡Escríbenos ahora!"];
       let currentIndex = 0;
-      
       setInterval(() => {
-        // Añadir clase de desvanecimiento
-        bubble.classList.add('fade');
-        
-        // Cambiar el texto después de una pequeña pausa para la animación
+        whatsappBubbleEl.classList.add('fade');
         setTimeout(() => {
           currentIndex = (currentIndex + 1) % messages.length;
-          bubble.textContent = messages[currentIndex];
-          // Quitar clase de desvanecimiento
-          bubble.classList.remove('fade');
+          whatsappBubbleEl.textContent = messages[currentIndex];
+          whatsappBubbleEl.classList.remove('fade');
         }, 300);
-      }, 2000);
+      }, 3000);
     }
 
-    // Función para normalizar texto (eliminar acentos y convertir a minúsculas)
-    function normalizeText(text) {
-      return text.toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
-    }
+    function normalizeText(text) { return text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""); }
 
-    // Función para buscar perfumes
-    function searchPerfumes(query) {
+    function searchPerfumesLogic(query) {
       const normalizedQuery = normalizeText(query.trim());
-
-      if (normalizedQuery === '') {
-        return [];
-      }
-
-      return perfumes.filter(perfume => {
-        const normalizedNombre = normalizeText(perfume.nombre);
-        return normalizedNombre.includes(normalizedQuery);
-      });
+      if (normalizedQuery === '') return [];
+      return perfumes.filter(perfume => normalizeText(perfume.nombre).includes(normalizedQuery));
     }
 
-    // Función para mostrar resultados de búsqueda
     function showSearchResults(results, query) {
-      const searchResults = document.getElementById('searchResults');
-      searchResults.innerHTML = '';
+      if (!searchResultsContainerEl) return;
+      searchResultsContainerEl.innerHTML = ''; 
+      const trimmedQuery = query.trim();
+      if (trimmedQuery === '') { searchResultsContainerEl.classList.remove('active'); return; }
       
-      if (query.trim() === '') {
-        searchResults.classList.remove('active');
-        return;
-      }
-      
-      searchResults.classList.add('active');
-      
+      searchResultsContainerEl.classList.add('active');
+      const relatedSearchText = document.createElement('div');
+      relatedSearchText.className = 'search-related-text';
+      relatedSearchText.textContent = `Buscar fragancias o perfumes relacionados a "${trimmedQuery}"`;
+      searchResultsContainerEl.appendChild(relatedSearchText);
+
       if (results.length === 0) {
-        searchResults.innerHTML = `
-          <div class="search-no-results">
-            <i class="fas fa-search"></i>
-            <p>No se encontraron perfumes que coincidan con "${query}"</p>
-          </div>
-        `;
-        return;
-      }
-      
-      results.forEach(perfume => {
-        const item = document.createElement('div');
-        item.className = 'search-result-item';
-        item.innerHTML = `
-          <img src="${perfume.imagen}" alt="${perfume.nombre}">
-          <span class="search-result-name">${perfume.nombre}</span>
-        `;
-        
-        item.addEventListener('click', () => {
-          // Ir al perfume (en este caso, filtramos todo y mostramos solo ese perfume)
-          filteredPerfumes = [perfume];
-          currentPage = 1;
-          renderPerfumes();
-          document.getElementById('categoryFilter').value = 'all';
-          searchResults.classList.remove('active');
-          document.getElementById('searchInput').value = '';
+        const noResultsItem = document.createElement('div');
+        noResultsItem.className = 'search-no-results';
+        noResultsItem.innerHTML = `<i class="fas fa-exclamation-circle"></i> No hay coincidencias.`;
+        searchResultsContainerEl.appendChild(noResultsItem);
+      } else {
+        results.slice(0, 5).forEach(perfume => {
+          const item = document.createElement('div');
+          item.className = 'search-result-item';
+          item.innerHTML = `<img src="${perfume.imagen}" alt="${perfume.nombre}" onerror="this.style.display='none'"><span class="search-result-name">${perfume.nombre}</span>`;
+          item.addEventListener('click', () => {
+            filteredPerfumes = [perfume]; currentPage = 1; renderPerfumes();
+            if (categoryFilterSelectEl) categoryFilterSelectEl.value = 'all';
+            searchResultsContainerEl.classList.remove('active');
+            if (searchInputEl) searchInputEl.value = perfume.nombre;
+          });
+          searchResultsContainerEl.appendChild(item);
         });
-        
-        searchResults.appendChild(item);
-      });
+      }
     }
 
     function renderPerfumes() {
-      const grid = document.getElementById('productGrid');
-      const noResults = document.getElementById('noResults');
-      
+      if (!productGridEl || !noResultsDivEl) return;
+      productGridEl.innerHTML = ''; 
+
       if (filteredPerfumes.length === 0) {
-        grid.innerHTML = '';
-        noResults.style.display = 'block';
-        renderPagination(0);
-        return;
+        noResultsDivEl.style.display = 'block';
+        let msg = 'No se encontraron perfumes.';
+        const currentSearchQuery = searchInputEl ? searchInputEl.value.trim() : '';
+        const currentCategory = categoryFilterSelectEl ? categoryFilterSelectEl.value : 'all';
+
+        if (currentSearchQuery !== '' && !perfumes.some(p => normalizeText(p.nombre).includes(normalizeText(currentSearchQuery)))) {
+          msg = `No hay perfumes que coincidan con "${currentSearchQuery}".`;
+        } else if (currentCategory !== 'all' && categoryFilterSelectEl) { // Añadido chequeo para categoryFilterSelectEl
+          msg = `No hay perfumes en la categoría "${categoryFilterSelectEl.options[categoryFilterSelectEl.selectedIndex].text}".`;
+        }
+        noResultsDivEl.textContent = msg;
+        renderPagination(0); return;
       }
       
-      noResults.style.display = 'none';
-      
-      // Calcular el índice de inicio y fin para la página actual
+      noResultsDivEl.style.display = 'none';
       const startIndex = (currentPage - 1) * perPage;
       const endIndex = Math.min(startIndex + perPage, filteredPerfumes.length);
-      const currentPerfumes = filteredPerfumes.slice(startIndex, endIndex);
+      const perfumesToRender = filteredPerfumes.slice(startIndex, endIndex);
       
-      grid.innerHTML = '';
-      currentPerfumes.forEach(p => {
+      perfumesToRender.forEach((p, index) => {
         const card = document.createElement('div');
-        card.className = 'card';
+        card.className = 'card product-card'; 
         card.dataset.category = p.categoria;
-        
-        // Construir opciones de versiones
-        let versionesHTML = '';
-        p.versiones.forEach(v => {
-          versionesHTML += `<option value="${v.nombre}">${v.nombre} - $${v.precio.toLocaleString()}</option>`;
-        });
-        
-        // Obtener el precio mínimo para mostrar en la información básica
+        card.style.opacity = '0'; 
+        card.style.animationDelay = `${index * 0.05}s`;
+
+        const versionesHTML = p.versiones.map(v => `<option value="${v.nombre}">${v.nombre} - $${v.precio.toLocaleString()}</option>`).join('');
         const precioMin = Math.min(...p.versiones.map(v => v.precio));
         
         card.innerHTML = `
-          <img src="${p.imagen}" alt="${p.nombre}">
+          <img src="${p.imagen}" alt="${p.nombre}" onerror="this.src='https://via.placeholder.com/280x280?text=Aroméa'">
           <div class="card-content">
             <div class="card-basic-info">
               <h2>${p.nombre}</h2>
               <div class="card-price">Desde $${precioMin.toLocaleString()}</div>
-              <select class="version-select" data-perfume-id="${p.id}">
-                ${versionesHTML}
-              </select>
-              <button class="add-to-cart" onclick="addToCartFromSelection(${p.id})">Agregar al carrito</button>
-              <button class="toggle-details" onclick="toggleDetails(this, ${p.id})">
-                Ver detalles <i class="fas fa-chevron-down"></i>
-              </button>
+              <select class="version-select" data-perfume-id="${p.id}">${versionesHTML}</select>
+              <button class="add-to-cart" data-perfume-id="${p.id}">Agregar al carrito <i class="fas fa-cart-plus"></i></button>
+              <button class="toggle-details" aria-expanded="false" aria-controls="details-${p.id}">Ver detalles <i class="fas fa-chevron-down"></i></button>
             </div>
             <div class="card-details" id="details-${p.id}">
               <p><strong>Descripción:</strong> ${p.descripcion}</p>
               <p><strong>Notas:</strong> ${p.notas}</p>
               <p><strong>Recomendada para:</strong> ${p.recomendado}</p>
             </div>
-          </div>
-        `;
-        grid.appendChild(card);
+          </div>`;
+        productGridEl.appendChild(card);
       });
-      
       renderPagination(filteredPerfumes.length);
     }
-    
+
     function toggleDetails(button, perfumeId) {
       const detailsDiv = document.getElementById(`details-${perfumeId}`);
-      detailsDiv.classList.toggle('expanded');
-      button.classList.toggle('expanded');
-      
-      if (detailsDiv.classList.contains('expanded')) {
-        button.innerHTML = 'Ocultar detalles <i class="fas fa-chevron-up"></i>';
-      } else {
-        button.innerHTML = 'Ver detalles <i class="fas fa-chevron-down"></i>';
-      }
+      if (!detailsDiv || !button) return;
+      const isExpanded = detailsDiv.classList.toggle('expanded');
+      button.classList.toggle('expanded', isExpanded);
+      button.setAttribute('aria-expanded', isExpanded);
+      button.innerHTML = isExpanded ? 'Ocultar detalles <i class="fas fa-chevron-up"></i>' : 'Ver detalles <i class="fas fa-chevron-down"></i>';
     }
-    
+
     function renderPagination(totalItems) {
-      const pagination = document.getElementById('pagination');
-      pagination.innerHTML = '';
-
+      if (!paginationDivEl) return;
+      paginationDivEl.innerHTML = '';
       const totalPages = Math.ceil(totalItems / perPage);
-      if (totalPages <= 1) {
-        pagination.style.display = 'none';
-        return;
-      }
+      if (totalPages <= 1) { paginationDivEl.style.display = 'none'; return; }
+      paginationDivEl.style.display = 'flex';
 
-      pagination.style.display = 'flex';
-
-      // Botón anterior
-      const prev = document.createElement('button');
-      prev.innerHTML = '<i class="fas fa-chevron-left"></i>';
-      prev.disabled = currentPage === 1;
-      prev.style.opacity = currentPage === 1 ? '0.5' : '1';
-      prev.addEventListener('click', () => {
-        if (currentPage > 1) {
-          currentPage--;
-          renderPerfumes();
-          window.scrollTo(0, 0);
-        }
+      createPageButton('<i class="fas fa-chevron-left"></i>', currentPage > 1 ? currentPage - 1 : null, currentPage === 1);
+      let pagesToShow = new Set([1, totalPages, currentPage, currentPage - 1, currentPage + 1]);
+      if (currentPage - 2 > 1) pagesToShow.add(currentPage - 2);
+      if (currentPage + 2 < totalPages) pagesToShow.add(currentPage + 2);
+      let lastPageRendered = 0;
+      Array.from(pagesToShow).filter(p => p > 0 && p <= totalPages).sort((a, b) => a - b).forEach(pageNumber => {
+        if (pageNumber - lastPageRendered > 1 && lastPageRendered > 0) createPageButton('...', null, true);
+        createPageButton(pageNumber, pageNumber, false, pageNumber === currentPage);
+        lastPageRendered = pageNumber;
       });
-      pagination.appendChild(prev);
+      createPageButton('<i class="fas fa-chevron-right"></i>', currentPage < totalPages ? currentPage + 1 : null, currentPage === totalPages);
+    }
 
-      // Lógica de paginación truncada
-      const delta = 2;
-      const range = [];
-      for (let i = 1; i <= totalPages; i++) {
-        if (
-          i === 1 || 
-          i === totalPages || 
-          (i >= currentPage - delta && i <= currentPage + delta)
-        ) {
-          range.push(i);
-        }
-      }
-
-      let last = 0;
-      for (let i of range) {
-        if (i - last > 1) {
-          const dots = document.createElement('button');
-          dots.textContent = '...';
-          dots.disabled = true;
-          dots.style.cursor = 'default';
-          dots.style.opacity = '0.5';
-          pagination.appendChild(dots);
-        }
-
-        const btn = document.createElement('button');
-        btn.textContent = i;
-        btn.classList.toggle('active', i === currentPage);
+    function createPageButton(text, pageToGo, isDisabled = false, isActive = false) {
+      const btn = document.createElement('button');
+      btn.innerHTML = text; btn.disabled = isDisabled || text === '...';
+      if (isActive) btn.classList.add('active');
+      if (pageToGo && !isDisabled && text !== '...') {
         btn.addEventListener('click', () => {
-          currentPage = i;
-          renderPerfumes();
-          window.scrollTo(0, 0);
+          currentPage = pageToGo; renderPerfumes();
+          if (productGridEl) window.scrollTo({ top: productGridEl.offsetTop - 100, behavior: 'smooth' });
         });
-        pagination.appendChild(btn);
-        last = i;
       }
-
-      // Botón siguiente
-      const next = document.createElement('button');
-      next.innerHTML = '<i class="fas fa-chevron-right"></i>';
-      next.disabled = currentPage === totalPages;
-      next.style.opacity = currentPage === totalPages ? '0.5' : '1';
-      next.addEventListener('click', () => {
-        if (currentPage < totalPages) {
-          currentPage++;
-          renderPerfumes();
-          window.scrollTo(0, 0);
-        }
-      });
-      pagination.appendChild(next);
+      if (paginationDivEl) paginationDivEl.appendChild(btn);
     }
 
-    function addToCartFromSelection(perfumeId) {
-      const select = document.querySelector(`.version-select[data-perfume-id="${perfumeId}"]`);
-      const versionNombre = select.value;
-      const perfume = perfumes.find(p => p.id === perfumeId);
-      const version = perfume.versiones.find(v => v.nombre === versionNombre);
-      
-      cart.push({ 
-        id: cartId++, 
-        perfumeId, 
-        nombre: perfume.nombre, 
-        version: versionNombre, 
-        imagen: perfume.imagen,
-        precio: version.precio
-      });
-      
-      updateCart();
-      showCart();
+    function addToCart(perfumeId, versionNombre) {
+      const perfume = perfumes.find(p => p.id === perfumeId); if (!perfume) return;
+      const version = perfume.versiones.find(v => v.nombre === versionNombre); if (!version) return;
+      cart.push({ cartItemId: cartIdCounter++, perfumeId, nombre: perfume.nombre, version: versionNombre, imagen: perfume.imagen, precio: version.precio });
+      updateCartDisplay(); showCart();
     }
 
-    function removeFromCart(id) {
-      const index = cart.findIndex(item => item.id === id);
-      if (index !== -1) {
-        cart.splice(index, 1);
-      }
-      updateCart();
+    function removeFromCart(cartItemId) {
+      const index = cart.findIndex(item => item.cartItemId === cartItemId);
+      if (index !== -1) cart.splice(index, 1);
+      updateCartDisplay();
     }
 
-    function updateCart() {
-      const cartList = document.getElementById('cartItems');
-      const cartTotal = document.getElementById('cartTotal');
-      const whatsappLink = document.getElementById('whatsappLink');
-      
+    function updateCartDisplay() {
+      if (!cartItemsDivEl || !cartTotalSpanEl || !whatsappLinkAnchorEl) return;
       if (cart.length === 0) {
-        cartList.innerHTML = `
-          <div class="cart-empty">
-            <i class="fas fa-shopping-cart"></i>
-            <p>Tu carrito está vacío</p>
-          </div>
-        `;
-        cartTotal.textContent = "0";
-        whatsappLink.href = "#";
-        whatsappLink.style.pointerEvents = "none";
-        whatsappLink.style.opacity = "0.5";
-        return;
+        cartItemsDivEl.innerHTML = `<div class="cart-empty"><i class="fas fa-shopping-bag"></i><p>Tu carrito está vacío</p></div>`;
+        cartTotalSpanEl.textContent = "0"; whatsappLinkAnchorEl.href = "#";
+        whatsappLinkAnchorEl.style.pointerEvents = "none"; whatsappLinkAnchorEl.style.opacity = "0.5"; return;
       }
-      
-      whatsappLink.style.pointerEvents = "auto";
-      whatsappLink.style.opacity = "1";
-      
-      cartList.innerHTML = '';
-      let total = 0;
-      
+      whatsappLinkAnchorEl.style.pointerEvents = "auto"; whatsappLinkAnchorEl.style.opacity = "1";
+      cartItemsDivEl.innerHTML = ''; let total = 0;
       cart.forEach(item => {
-        const cartItem = document.createElement('div');
-        cartItem.className = 'cart-item';
-        cartItem.innerHTML = `
-          <img src="${item.imagen}" alt="${item.nombre}" class="cart-item-image">
+        const cartItemEl = document.createElement('div'); cartItemEl.className = 'cart-item';
+        cartItemEl.innerHTML = `
+          <img src="${item.imagen}" alt="${item.nombre}" class="cart-item-image" onerror="this.src='https://via.placeholder.com/70x70?text=N/A'">
           <div class="cart-item-details">
-            <div>
-              <h4 class="cart-item-name">${item.nombre}</h4>
-              <div class="cart-item-version">${item.version}</div>
-            </div>
+            <div class="cart-item-info"><h4 class="cart-item-name">${item.nombre}</h4><div class="cart-item-version">${item.version}</div></div>
             <div class="cart-item-price">$${item.precio.toLocaleString()}</div>
           </div>
-          <button class="cart-item-remove" onclick="removeFromCart(${item.id})">
-            <i class="fas fa-trash"></i>
-          </button>
-        `;
-        cartList.appendChild(cartItem);
-        total += item.precio;
+          <button class="cart-item-remove" data-cart-item-id="${item.cartItemId}" aria-label="Eliminar ${item.nombre} del carrito"><i class="fas fa-trash"></i></button>`;
+        cartItemsDivEl.appendChild(cartItemEl); total += item.precio;
       });
-      
-      cartTotal.textContent = total.toLocaleString();
-      
-      // Actualizar enlace de WhatsApp
-      let mensajeWA = "Hola, me gustaría comprar los siguientes perfumes:%0A%0A";
-      cart.forEach(item => {
-        mensajeWA += `- ${item.nombre} (${item.version})%0A`;
-      });
-      mensajeWA += `%0ATotal: $${total.toLocaleString()}`;
-      
-      whatsappLink.href = `https://wa.me/573023299774?text=${mensajeWA}`;
+      cartTotalSpanEl.textContent = total.toLocaleString();
+      let mensajeWA = "Hola Aroméa, me gustaría comprar los siguientes perfumes:\n\n";
+      cart.forEach(item => { mensajeWA += `- ${item.nombre} (${item.version}) - $${item.precio.toLocaleString()}\n`; });
+      mensajeWA += `\nTotal: $${total.toLocaleString()}`;
+      whatsappLinkAnchorEl.href = `https://wa.me/573023299774?text=${encodeURIComponent(mensajeWA)}`;
     }
 
-    function showCart() {
-      document.getElementById('cartModal').style.display = 'flex';
-    }
+    function showCart() { updateCartDisplay(); if (cartModalEl) cartModalEl.classList.add('active'); }
+    function hideCart() { if (cartModalEl) cartModalEl.classList.remove('active'); }
 
-    function hideCart() {
-      document.getElementById('cartModal').style.display = 'none';
-    }
-
-    function filterPerfumes(category) {
-      currentPage = 1; // Resetear a primera página al filtrar
-      if (category === 'all') {
-        filteredPerfumes = [...perfumes];
-      } else {
-        filteredPerfumes = perfumes.filter(p => p.categoria === category);
-      }
+    function filterPerfumesByCategory(category) {
+      currentPage = 1; 
+      if (category === 'all') filteredPerfumes = [...perfumes];
+      else filteredPerfumes = perfumes.filter(p => p.categoria === category);
+      if (searchInputEl) searchInputEl.value = ''; 
       renderPerfumes();
     }
 
-    document.getElementById('categoryFilter').addEventListener('change', function () {
-      filterPerfumes(this.value);
-    });
-
-    // Configurar la búsqueda en tiempo real
-    const searchInput = document.getElementById('searchInput');
-    
-    searchInput.addEventListener('input', function() {
-      const query = this.value;
-      const results = searchPerfumes(query);
-      showSearchResults(results, query);
-    });
-    
-    // Cerrar los resultados de búsqueda al hacer clic fuera de la barra de búsqueda
-    document.addEventListener('click', function(e) {
-      const searchContainer = document.querySelector('.search-container');
-      const searchResults = document.getElementById('searchResults');
-      
-      if (!searchContainer.contains(e.target)) {
-        searchResults.classList.remove('active');
+    document.addEventListener('DOMContentLoaded', () => {
+      showWelcomeModal(); filterPerfumesByCategory('all'); updateCartDisplay(); alternateWhatsAppMessage();
+      if (searchInputEl) {
+        searchInputEl.addEventListener('input', function() {
+          const query = this.value; const results = searchPerfumesLogic(query); showSearchResults(results, query);
+          if (query.trim() === '' && categoryFilterSelectEl) filterPerfumesByCategory(categoryFilterSelectEl.value);
+        });
+        searchInputEl.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') { e.preventDefault(); const query = this.value.trim();
+                if (query) { filteredPerfumes = searchPerfumesLogic(query); currentPage = 1; renderPerfumes();
+                    if (searchResultsContainerEl) searchResultsContainerEl.classList.remove('active'); }
+            }
+        });
       }
-    });
+      if (categoryFilterSelectEl) categoryFilterSelectEl.addEventListener('change', function () { filterPerfumesByCategory(this.value); });
+      
+      document.body.addEventListener('click', function(e) {
+        const addToCartButton = e.target.closest('.add-to-cart');
+        const removeFromCartButton = e.target.closest('.cart-item-remove');
+        const toggleDetailsButton = e.target.closest('.toggle-details');
 
-    // Inicialización
-    filterPerfumes('all');
-    updateCart();
-    alternateWhatsAppMessage(); // Iniciar alternancia de mensajes
+        if (addToCartButton) {
+          const perfumeId = parseInt(addToCartButton.dataset.perfumeId);
+          const selectVersion = addToCartButton.closest('.card-basic-info').querySelector('.version-select');
+          if (selectVersion) addToCart(perfumeId, selectVersion.value);
+        } else if (removeFromCartButton) {
+          const cartItemId = parseInt(removeFromCartButton.dataset.cartItemId);
+          removeFromCart(cartItemId);
+        } else if (toggleDetailsButton) {
+            const perfumeId = parseInt(toggleDetailsButton.closest('.card-content').querySelector('.version-select').dataset.perfumeId);
+            toggleDetails(toggleDetailsButton, perfumeId);
+        } else if (searchResultsContainerEl && searchResultsContainerEl.classList.contains('active') && searchInputEl && !searchInputEl.contains(e.target) && !searchResultsContainerEl.contains(e.target)) {
+          searchResultsContainerEl.classList.remove('active');
+        }
+      });
+    });
   </script>
 </body>
 </html>
