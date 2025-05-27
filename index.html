@@ -82,6 +82,10 @@
       flex-shrink: 1; 
       max-width: 300px; 
     }
+    .search-input-wrapper {
+        position: relative;
+        width: 100%;
+    }
     .search-input {
       width: 100%;
       padding: 0.75rem 1.5rem;
@@ -91,6 +95,19 @@
       border-radius: 8px;
       background: var(--bg);
       color: var(--text);
+      padding-right: 3rem; /* Espacio para el icono */
+    }
+    .search-icon {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text);
+        cursor: pointer;
+        font-size: 1.2rem;
+    }
+    .search-input:focus + .search-icon {
+        color: var(--accent);
     }
     .search-results {
       position: absolute;
@@ -291,7 +308,21 @@
     .search-result-item:hover { background-color: var(--accent-light); }
     .search-result-item img { width: 50px; height: 50px; object-fit: contain; border-radius: 4px; }
     .search-result-name { font-size: 1rem; font-weight: 600; color: var(--text); }
-    .search-related-text { padding: 12px 10px; font-style: italic; color: var(--accent); border-bottom: 1px solid var(--border); cursor: default; font-size: 0.9rem; }
+    .search-related-text { 
+      padding: 12px 10px; 
+      font-style: italic; 
+      color: var(--accent); 
+      border-bottom: 1px solid var(--border); 
+      cursor: pointer; /* Changed to pointer */
+      font-size: 0.9rem;
+      text-decoration: underline; /* Added underline */
+      font-weight: 600; /* Made it slightly bolder */
+      transition: background-color 0.2s ease, text-shadow 0.2s ease; /* Added text-shadow transition */
+    }
+    .search-related-text:hover { 
+      background-color: var(--accent-light); 
+      text-shadow: 0 0 5px rgba(0,0,0,0.2); /* Subtle text shadow on hover */
+    }
     .search-no-results { padding: 15px 10px; text-align: center; color: #777; }
     .search-no-results i { margin-right: 8px; color: var(--accent); }
 
@@ -330,7 +361,10 @@
     </div>
     <nav>
       <div class="search-container">
-        <input type="text" id="searchInput" class="search-input" placeholder="Buscar perfumes...">
+        <div class="search-input-wrapper">
+            <input type="text" id="searchInput" class="search-input" placeholder="Buscar perfumes...">
+            <span class="search-icon" id="searchIcon"><i class="fas fa-search"></i></span>
+        </div>
         <div class="search-results" id="searchResults"></div>
       </div>
       <select id="categoryFilter">
@@ -434,7 +468,7 @@
           { nombre: "Original", precio: 420000 }
         ]
       },
-            {
+      {
         id: 5,
         nombre: "Ahli Vega",
         categoria: "nicho",
@@ -1394,7 +1428,7 @@
         nombre: "Carolina Herrera 212 Men NYC",
         categoria: "disenador",
         descripcion: "Déjate envolver por su composición aromática que refleja el dinamismo y el pulso del distrito neoyorquino de Manhattan.",
-        notas: "Lavanda, notas verdes, pomelo, bergamota, jengibre, gardenia, violeta, salvia, ládano, sándalo, almizcle, madera de gaiac, vetiver.",
+        notas: "Lavanda, notas verdes, pomelo, bergamota, jengibre, gardenia, violeta, salvia, ládano, sándalo, almizcle, madera de gaiac, vetiver 1  ",
         recomendado: "El día a día, salidas informales o en climas cálidos donde su frescura y vitalidad te harán sentir enérgico y con estilo.",
         imagen: "https://i0.wp.com/irisfragancias.com/wp-content/uploads/2021/08/212-men-carolina-herrera.jpg",
         versiones: [
@@ -1407,7 +1441,7 @@
         nombre: "Carolina Herrera 212 NYC",
         categoria: "disenador",
         descripcion: "Con el eau de toilette para mujer todos sabrán que eres una mujer que aprovecha su energía a la perfección mucho antes de tan siquiera verte.",
-        notas: "Flor de azahar del naranjo, mandarina, flor de cactus, bergamota, camelia blanca, azucena, gardenia, fresia, jazmín, rosa, lirio de los valles.",
+        notas: "Flor de azahar del naranjo, mandarina, flor de cactus, bergamota, camelia blanca, azucena, gardenia, fresia, jazmín, rosa, lirio de los valles 1  ",
         recomendado: "El día a día, especialmente en primavera y verano, o para salidas informales donde su frescura y sofisticación sutil te harán sentirte cómoda y con estilo.",
         imagen: "https://f.fcdn.app/imgs/8b8b2f/electroventas.com.uy/elecuy/ff33/original/catalogo/VIE65116553_VIE65116553_2/1500-1500/perfume-carolina-herrera-212-nyc-edt-100ml-original-perfume-carolina-herrera-212-nyc-edt-100ml-original.jpg",
         versiones: [
@@ -6348,6 +6382,7 @@
           { nombre: "Original", precio: 500000 }
         ]
       }
+
     ];
     
     const perPage = 12;
@@ -6362,6 +6397,7 @@
     const noResultsDivEl = document.getElementById('noResults');
     const paginationDivEl = document.getElementById('pagination');
     const searchInputEl = document.getElementById('searchInput');
+    const searchIconEl = document.getElementById('searchIcon'); // New element
     const searchResultsContainerEl = document.getElementById('searchResults');
     const categoryFilterSelectEl = document.getElementById('categoryFilter');
     const cartItemsDivEl = document.getElementById('cartItems');
@@ -6388,6 +6424,21 @@
 
     function normalizeText(text) { return text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""); }
 
+    function performSearch() {
+        const query = searchInputEl.value.trim();
+        if (query) {
+            filteredPerfumes = searchPerfumesLogic(query);
+            currentPage = 1;
+            renderPerfumes();
+            if (searchResultsContainerEl) searchResultsContainerEl.classList.remove('active');
+            if (categoryFilterSelectEl) categoryFilterSelectEl.value = 'all'; // Reset category filter on direct search
+        } else {
+            // If search input is empty, reset to show all perfumes or apply current category filter
+            filterPerfumesByCategory(categoryFilterSelectEl ? categoryFilterSelectEl.value : 'all');
+            if (searchResultsContainerEl) searchResultsContainerEl.classList.remove('active');
+        }
+    }
+
     function searchPerfumesLogic(query) {
       const normalizedQuery = normalizeText(query.trim());
       if (normalizedQuery === '') return [];
@@ -6403,7 +6454,8 @@
       searchResultsContainerEl.classList.add('active');
       const relatedSearchText = document.createElement('div');
       relatedSearchText.className = 'search-related-text';
-      relatedSearchText.textContent = `Buscar fragancias o perfumes relacionados a "${trimmedQuery}"`;
+      relatedSearchText.textContent = `Buscar perfumes relacionados a "${trimmedQuery}"`;
+      relatedSearchText.addEventListener('click', performSearch); // Make it clickable
       searchResultsContainerEl.appendChild(relatedSearchText);
 
       if (results.length === 0) {
@@ -6415,7 +6467,7 @@
         results.slice(0, 5).forEach(perfume => {
           const item = document.createElement('div');
           item.className = 'search-result-item';
-          item.innerHTML = `<img src="${perfume.imagen}" alt="${perfume.nombre}" onerror="this.style.display='none'"><span class="search-result-name">${perfume.nombre}</span>`;
+          item.innerHTML = `<img src="${perfume.imagen}" alt="${perfume.nombre}" onerror="this.src='https://via.placeholder.com/50x50?text=N/A'"><span class="search-result-name">${perfume.nombre}</span>`;
           item.addEventListener('click', () => {
             filteredPerfumes = [perfume]; currentPage = 1; renderPerfumes();
             if (categoryFilterSelectEl) categoryFilterSelectEl.value = 'all';
@@ -6439,7 +6491,7 @@
 
         if (currentSearchQuery !== '' && !perfumes.some(p => normalizeText(p.nombre).includes(normalizeText(currentSearchQuery)))) {
           msg = `No hay perfumes que coincidan con "${currentSearchQuery}".`;
-        } else if (currentCategory !== 'all' && categoryFilterSelectEl) { // Añadido chequeo para categoryFilterSelectEl
+        } else if (currentCategory !== 'all' && categoryFilterSelectEl) { 
           msg = `No hay perfumes en la categoría "${categoryFilterSelectEl.options[categoryFilterSelectEl.selectedIndex].text}".`;
         }
         noResultsDivEl.textContent = msg;
@@ -6577,18 +6629,26 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       showWelcomeModal(); filterPerfumesByCategory('all'); updateCartDisplay(); alternateWhatsAppMessage();
+      
       if (searchInputEl) {
         searchInputEl.addEventListener('input', function() {
-          const query = this.value; const results = searchPerfumesLogic(query); showSearchResults(results, query);
+          const query = this.value; 
+          const results = searchPerfumesLogic(query); 
+          showSearchResults(results, query);
           if (query.trim() === '' && categoryFilterSelectEl) filterPerfumesByCategory(categoryFilterSelectEl.value);
         });
         searchInputEl.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') { e.preventDefault(); const query = this.value.trim();
-                if (query) { filteredPerfumes = searchPerfumesLogic(query); currentPage = 1; renderPerfumes();
-                    if (searchResultsContainerEl) searchResultsContainerEl.classList.remove('active'); }
+            if (e.key === 'Enter') { 
+                e.preventDefault(); 
+                performSearch();
             }
         });
       }
+
+      if (searchIconEl) {
+          searchIconEl.addEventListener('click', performSearch); // Click event for the search icon
+      }
+
       if (categoryFilterSelectEl) categoryFilterSelectEl.addEventListener('change', function () { filterPerfumesByCategory(this.value); });
       
       document.body.addEventListener('click', function(e) {
